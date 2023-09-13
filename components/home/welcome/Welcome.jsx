@@ -12,11 +12,11 @@ import { useRouter } from "expo-router";
 import styles from "./welcome.style";
 import { icons, SIZES } from "../../../constants";
 
-const jobTypes = ["Full-time", "Part-time", "Contractor"]
+const jobTypes = ["Full-time", "Part-time", "Contractor"];
 
-const Welcome = () => {
+const Welcome = ({searchTerm, setSearchTerm, handleClick}) => {
   const router = useRouter();
-  const [activeJobType, setActiveJobType] = useState('Full-Time')
+  const [activeJobType, setActiveJobType] = useState("Full-Time");
 
   return (
     <View>
@@ -31,13 +31,13 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
-            onChange={(e) => {}}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)}
             placeholder="O'Que você está procurando?"
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
           <Image
             source={icons.search}
             resizeMode="contain"
@@ -47,21 +47,21 @@ const Welcome = () => {
       </View>
 
       <View style={styles.tabsContainer}>
-        <FlatList 
+        <FlatList
           data={jobTypes}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.tab(activeJobType, item)}
               onPress={() => {
-                setActiveJobType(item)
-                router.push(`/seach/${item}`)
+                setActiveJobType(item);
+                router.push(`/search/${item}`);
               }}
             >
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
             </TouchableOpacity>
           )}
-          keyExtractor={item => item}
-          contentContainerStyle={{columnGap: SIZES.small}}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         />
       </View>
