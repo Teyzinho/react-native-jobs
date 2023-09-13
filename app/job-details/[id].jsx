@@ -21,11 +21,14 @@ import {
 } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 
+const tabs = ['Sobre', 'Qualificações', 'Responsabilidades'];
+
 const JobDetails = () => {
   const params = useGlobalSearchParams();
   const router = useRouter();
 
   const [refreshing, setRefreshing] = useState(false)
+  const [activeTab, setActiveTab] = useState(tabs[0])
 
   params.id;
 
@@ -80,8 +83,10 @@ const JobDetails = () => {
               />
 
               <JobTabs
-              
-              />
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />  
 
 
             </View>
